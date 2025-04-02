@@ -43,8 +43,8 @@ const doUserTask = async (cloudClient) => {
 const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,userNameInfo) => {
   const { familyInfoResp } = await cloudClient.getFamilyList();
   if (!familyInfoResp) {
+	  console.log(`未能获取家庭信息`);
       return errorMessages.push(`${accountIndex}. 账号 ${userNameInfo} 错误: 未能获取家庭信息`);
-	  accountIndex--;
     }
   
     let familyId = null;
@@ -56,6 +56,7 @@ const doFamilyTask = async (cloudClient, acquireFamilyTotalSize,errorMessages,us
       if (targetFamily) {
         familyId = targetFamily.familyId;
       } else {
+		  console.log(`没有加入到指定家庭分组`);
         return errorMessages.push(`${accountIndex}. 账号 ${userNameInfo} 错误: 没有加入指定家庭组`);
       }
     } else {
@@ -108,7 +109,7 @@ const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,e
 		
       
     } catch (e) {
-      
+      console.log(e);
       if (e.code === "ECONNRESET" || e.code === "ETIMEDOUT") {
         logger.error(`${accountIndex}. 账号 ${userNameInfo}请求超时`);
         throw e;
@@ -125,7 +126,7 @@ const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,e
         `耗时 ${((Date.now() - before) / 1000).toFixed(2)} 秒`
       );
 	  console.log(' ');
-	 await delay((Math.random() * 2000) + 1000); // 随机等待1到3秒
+	 await delay((Math.random() * 3000) + 1000); // 随机等待1到3秒
     }
   }
 };
