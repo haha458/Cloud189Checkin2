@@ -141,8 +141,9 @@ async function main() {
   }
   //  用于统计实际容量变化
   const userSizeInfoMap = new Map();
-  
+         console.log("========",accounts);
 	const accountsdel = accounts[0].trim().split(/[\n ]+/);
+	console.log(accountsdel);
   for (let index = 0; index < accountsdel.length; index += 2) {
     const [ userName, password ] = accountsdel.slice(index, index + 2);
     await run(userName, password, userSizeInfoMap, acquireFamilyTotalSize,errorMessages);
