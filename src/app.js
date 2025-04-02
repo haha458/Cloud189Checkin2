@@ -141,9 +141,12 @@ async function main() {
   }
   //  用于统计实际容量变化
   const userSizeInfoMap = new Map();
-         console.log("========",accounts);
-	const accountsdel = accounts[0].trim().split(/[\n ]+/);
-	console.log(accountsdel);
+  
+	const accountsdel = accounts.flatMap(line => {
+		return line
+			.split(/\s+/) // 按任意空白符分割
+			.filter(item => item.length > 0) // 防止空字符串
+});
   for (let index = 0; index < accountsdel.length; index += 2) {
     const [ userName, password ] = accountsdel.slice(index, index + 2);
     await run(userName, password, userSizeInfoMap, acquireFamilyTotalSize,errorMessages);
