@@ -125,7 +125,7 @@ const run = async (userName, password, userSizeInfoMap, acquireFamilyTotalSize,e
         `耗时 ${((Date.now() - before) / 1000).toFixed(2)} 秒`
       );
 	  console.log(' ');
-	 await delay((Math.random() * 3000) + 2000); // 随机等待2到5秒
+	 await delay((Math.random() * 2000) + 1000); // 随机等待1到3秒
     }
   }
 };
